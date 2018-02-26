@@ -63,3 +63,13 @@ body {
     cursor: pointer;
   }
 }
+
+/* User profile page */
+// 用户个人中心头像下方留白调整
+.users-show-page {
+  .user-info {
+    .thumbnail {
+      margin-bottom: 0px;
+    }
+  }
+}

@@ -52,7 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://laravelblog'),
+//    'url' => env('APP_URL', 'http://laravelblog'),
+    'url' => env('APP_URL', 'http://192.168.33.10:8015'),
 
     /*
     |--------------------------------------------------------------------------

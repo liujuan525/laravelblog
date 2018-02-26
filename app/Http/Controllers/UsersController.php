@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Handlers\ImageUploadHandler;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
+use Illuminate\Routing\Controller;
 
 class UsersController extends Controller
 {
     /**
-     * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * 展示用户个人信息
      */
     public function show(User $user)
@@ -20,8 +20,6 @@ class UsersController extends Controller
     }
 
     /**
-     * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * 编辑用户个人信息
      */
     public function edit(User $user)
@@ -30,15 +28,21 @@ class UsersController extends Controller
     }
 
     /**
-     * @param UserRequest $request
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
      * 更新用户个人信息
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
-        $user -> update($request -> all());
-        return redirect() -> route('users.show', $user->id) -> with('success', '个人资料更新成功!');
+        $data = $request->all();
+
+        if ($request->avatar) {
+            $result = $uploader->save($request->avatar, 'avatars', $user->id, 362);
+            if ($result) {
+                $data['avatar'] = $result['path'];
+            }
+        }
+
+        $user->update($data);
+        return redirect()->route('users.show', $user->id)->with('success', '个人资料更新成功！');
     }
 
 }
