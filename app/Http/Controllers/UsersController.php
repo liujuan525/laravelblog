@@ -6,10 +6,15 @@ use App\Handlers\ImageUploadHandler;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
     /**
      * 展示用户个人信息
      */
@@ -24,6 +29,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        // 校验用户是否授权 下面的update指的是UserPolicy授权类里的 update 授权方法
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
@@ -32,6 +39,7 @@ class UsersController extends Controller
      */
     public function update(UserRequest $request, ImageUploadHandler $uploader, User $user)
     {
+        $this->authorize('update', $user);
         $data = $request->all();
 
         if ($request->avatar) {
