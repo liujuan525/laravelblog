@@ -49,3 +49,5 @@ Route::patch('/users/{user}', 'UsersController@update')->name('users.update'); /
 Route::group(['middleware' => ['web']], function(){
 //    以下为路由
 });
+
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
