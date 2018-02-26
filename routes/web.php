@@ -34,3 +34,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
  * 以上代码等同于 Auth::routes();
  */
 
+
+// 默认开启session
+Route::group(['middleware' => ['web']], function(){
+//    以下为路由
+});
