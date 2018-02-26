@@ -51,3 +51,5 @@ Route::group(['middleware' => ['web']], function(){
 });
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
