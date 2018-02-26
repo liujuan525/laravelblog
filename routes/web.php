@@ -34,6 +34,16 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
  * 以上代码等同于 Auth::routes();
  */
 
+// 注册资源路由
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+/**
+ * 上面代码等同于下面三行代码
+Route::get('/users/{user}', 'UsersController@show')->name('users.show'); // 显示个人信息
+Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit'); // 编辑个人信息
+Route::patch('/users/{user}', 'UsersController@update')->name('users.update'); // 处理edit页面提交的更改
+*/
+
+
 
 // 默认开启session
 Route::group(['middleware' => ['web']], function(){
