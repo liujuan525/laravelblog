@@ -18,6 +18,7 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
+    // 话题首页展示
 	public function index(Request $request, Topic $topic)
 	{
 	    // $request->order 是获取 URI 域名/topics?order=recent 中的 order 参数
@@ -25,11 +26,13 @@ class TopicsController extends Controller
 		return view('topics.index', compact('topics'));
 	}
 
+	// 展示话题内容
     public function show(Topic $topic)
     {
         return view('topics.show', compact('topic'));
     }
 
+    // 新建话题
 	public function create(Topic $topic)
 	{
 	    $categories = Category::all();
@@ -42,29 +45,32 @@ class TopicsController extends Controller
         $topic->user_id = Auth::id();
         $topic->save();
 
-        return redirect()->route('topics.show', $topic->id)->with('message', '创建成功!');
+        return redirect()->route('topics.show', $topic->id)->with('message', '创建话题成功!');
     }
 
+    // 编辑话题
 	public function edit(Topic $topic)
 	{
         $this->authorize('update', $topic);
 		return view('topics.create_and_edit', compact('topic'));
 	}
 
+	// 更新话题
 	public function update(TopicRequest $request, Topic $topic)
 	{
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
-		return redirect()->route('topics.show', $topic->id)->with('message', '修改成功!');
+		return redirect()->route('topics.show', $topic->id)->with('message', '修改话题成功!');
 	}
 
+	// 删除话题
 	public function destroy(Topic $topic)
 	{
 		$this->authorize('destroy', $topic);
 		$topic->delete();
 
-		return redirect()->route('topics.index')->with('message', '删除成功!');
+		return redirect()->route('topics.index')->with('message', '删除话题成功!');
 	}
 
 	// 图片上传功能
