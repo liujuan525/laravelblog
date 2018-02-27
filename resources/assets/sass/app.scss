@@ -170,5 +170,19 @@ body {
   }
 }
 
+/* Notifications badge */
+// 消息通知
+.notifications-badge {
+  margin-top: -1;
+
+  .badge-fade {
+    background-color: #EBE8E8;
+  }
+
+  .badge-hint {
+    background-color: #d15b47 !important;;
+  }
+}
+
 
 
