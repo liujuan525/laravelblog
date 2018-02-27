@@ -43,8 +43,6 @@ Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit'); //
 Route::patch('/users/{user}', 'UsersController@update')->name('users.update'); // 处理edit页面提交的更改
 */
 
-
-
 // 默认开启session
 Route::group(['middleware' => ['web']], function(){
 //    以下为路由
@@ -60,10 +58,16 @@ Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 // 上传图片
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+// 回复路由
+Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
 
 
 
 
 
 
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+
+
+
+
