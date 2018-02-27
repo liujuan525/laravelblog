@@ -52,7 +52,8 @@ class TopicsController extends Controller
 	public function edit(Topic $topic)
 	{
         $this->authorize('update', $topic);
-		return view('topics.create_and_edit', compact('topic'));
+        $categories = Category::all();
+		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
 	// 更新话题
@@ -61,7 +62,7 @@ class TopicsController extends Controller
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
 
-		return redirect()->route('topics.show', $topic->id)->with('message', '修改话题成功!');
+		return redirect()->route('topics.show', $topic->id)->with('message', '更新话题成功!');
 	}
 
 	// 删除话题
