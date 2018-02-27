@@ -6,6 +6,12 @@ class Topic extends Model
 {
     protected $fillable = ['title', 'body','category_id', 'excerpt', 'slug'];
 
+    // 话题与评论：一对多的对应关系
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     public function category()
     {
         // 使用 belongsTo() 方法来实现 一对一 对应关系

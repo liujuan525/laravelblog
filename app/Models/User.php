@@ -27,6 +27,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // 用户与评论：一对多的对应关系
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     // 用户与话题为 一对多 的关系
     public function topics()
     {
