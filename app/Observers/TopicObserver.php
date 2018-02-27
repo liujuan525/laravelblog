@@ -3,12 +3,19 @@
 namespace App\Observers;
 
 use App\Models\Topic;
+use App\Policies\TopicPolicy;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
 
 class TopicObserver
 {
+    // 对 excerpt 字段赋值
+    public function saving(Topic $topic)
+    {
+        $topic->excerpt = make_excerpt($topic->body);
+    }
+
     public function creating(Topic $topic)
     {
         //
