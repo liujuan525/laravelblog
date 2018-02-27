@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Models\Reply;
 
-class TopicReplied extends Notification
+class TopicReplied extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -28,8 +28,8 @@ class TopicReplied extends Notification
     // 通知在哪个频道发送
     public function via($notifiable)
     {
-        // 开启数据库的通知频道
-        return ['database'];
+        // 开启通知频道
+        return ['database', 'mail'];
     }
 
    // 数据库方式
@@ -49,6 +49,15 @@ class TopicReplied extends Notification
             'topic_id' => $topic->id,
             'topic_title' => $topic->title,
         ];
+    }
+
+    public function toMail($notifiable)
+    {
+        $url = $this->reply->topic->link(['#reply' . $this->reply->id]);
+
+        return (new MailMessage)
+            ->line('你的话题有新回复！')
+            ->action('查看回复', $url);
     }
 
 }

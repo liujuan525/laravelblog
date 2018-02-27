@@ -45,7 +45,7 @@ class User extends Authenticatable
     // 是否授权
     public function isAuthorOf($model)
     {
-        return $this->id = $model->user_id;
+        return $this->id == $model->user_id;
     }
 
     // 消息通知
