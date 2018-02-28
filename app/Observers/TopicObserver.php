@@ -29,13 +29,9 @@ class TopicObserver
         }
     }
 
-    public function creating(Topic $topic)
+    // 删除话题，且同时删除话题下的回复
+    public function deleted(Topic $topic)
     {
-        //
-    }
-
-    public function updating(Topic $topic)
-    {
-        //
+        \DB::table('replies')->where('topic_id', $topic->id)->delete();
     }
 }
