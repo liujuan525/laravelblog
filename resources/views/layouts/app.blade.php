@@ -33,6 +33,11 @@
 
 </div>
 
+@if (app()->isLocal())
+    {{--将IP地址访问改为域名访问，并sudosu.php中添加域名后缀后可以使用--}}
+{{--    @include('sudosu::user-selector')--}}
+@endif
+
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('scripts')
