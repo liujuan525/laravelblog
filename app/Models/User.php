@@ -12,6 +12,9 @@ class User extends Authenticatable
     // 活跃用户的计算
     use Traits\ActiveUserHelper;
 
+    // 记录用户最后一次登录时间
+    use Traits\LastActivedAtHelper;
+
     // 获取到扩展包提供的所有权限和角色的操作方法
     use HasRoles;
 
