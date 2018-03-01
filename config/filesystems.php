@@ -50,7 +50,9 @@ return [
 
         'public' => [
             'driver' => 'local',
+            // 文件保存的路径
             'root' => storage_path('app/public'),
+//            'root' => public_path('uploads'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
