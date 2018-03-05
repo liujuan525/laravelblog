@@ -44,11 +44,6 @@ Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit'); //
 Route::patch('/users/{user}', 'UsersController@update')->name('users.update'); // 处理edit页面提交的更改
 */
 
-// 默认开启session
-Route::group(['middleware' => ['web']], function(){
-//    以下为路由
-});
-
 // 话题模块路由
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
