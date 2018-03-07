@@ -22,13 +22,9 @@ class User extends Authenticatable
         notify as protected laravelNotify;
     }
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    // 可批量插入的数据字段
     protected $fillable = [
-        'name', 'email', 'password', 'introduction', 'avatar'
+        'name', 'phone', 'email', 'password', 'introduction', 'avatar'
     ];
 
     /**
